@@ -1,11 +1,11 @@
 workflows:
   ios-workflow:
-    name: Build iOS App
+    name: iOS StopwatchApp Build
+    max_build_duration: 60
     environment:
-      xcode: 16.3
+      xcode: latest
     scripts:
-      - name: Build
-        script: |
-          xcodebuild -scheme StopwatchApp -sdk iphoneos -configuration Release
+      - name: Build iOS App
+        script: xcodebuild -project StopwatchApp.xcodeproj -scheme StopwatchApp -sdk iphoneos -configuration Release
     artifacts:
-      - build/Release-iphoneos/*.app
+      - build/ios/ipa/*.ipa
