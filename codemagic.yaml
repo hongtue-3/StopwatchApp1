@@ -1,0 +1,11 @@
+workflows:
+  ios-workflow:
+    name: Build iOS App
+    environment:
+      xcode: 16.3
+    scripts:
+      - name: Build
+        script: |
+          xcodebuild -scheme StopwatchApp -sdk iphoneos -configuration Release
+    artifacts:
+      - build/Release-iphoneos/*.app
