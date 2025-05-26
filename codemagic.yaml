@@ -3,9 +3,12 @@ workflows:
     name: iOS StopwatchApp Build
     max_build_duration: 60
     environment:
-      xcode: latest
+      xcode: 16.3
     scripts:
-      - name: Build iOS App
-        script: xcodebuild -project StopwatchApp.xcodeproj -scheme StopwatchApp -sdk iphoneos -configuration Release
+      - name: Build iOS Archive and Export IPA
+        script: |
+          cd StopwatchApp
+          xcodebuild clean archive -project StopwatchApp.xcodeproj -scheme StopwatchApp -sdk iphoneos -configuration Release -archivePath $PWD/build/StopwatchApp.xcarchive
+          xcodebuild -exportArchive -archivePath $PWD/build/StopwatchApp.xcarchive -exportPath $PWD/build/ios/ipa -exportOptionsPlist ExportOptions.plist
     artifacts:
       - build/ios/ipa/*.ipa
